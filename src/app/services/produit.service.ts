@@ -22,7 +22,7 @@ export class ProduitService {
 
 
   constructor(private http : HttpClient){
-    // this.categories = [ 
+    // this.categories = [
     //   {idCat : 1, nomCat : "PC"},
     //   {idCat : 2, nomCat : "Imprimante"}
     // ];
@@ -43,15 +43,23 @@ export class ProduitService {
     return this.http.post<Produit>(this.apiURL, prod, httpOptions);
   }
 
+/*
   supprimerProduit( prod: Produit){
     const index = this.produits.indexOf(prod, 0);
     if (index > -1) {
     this.produits.splice(index, 1);
     }
   }
+ */
+
+ supprimerProduit(id : number) {
+ const url = `${this.apiURL}/${id}`;
+ return this.http.delete(url, httpOptions);
+ }
+
 
   consulterProduit(id:number): Produit{
-    return this.produits.find(p => p.idProduit == id)!;     
+    return this.produits.find(p => p.idProduit == id)!;
     }
 
   trierProduits(){
@@ -65,19 +73,19 @@ export class ProduitService {
     return 0;
     });
     }
-  
+
   updateProduit(p:Produit)
   {
-  this.supprimerProduit(p);
-  this.ajouterProduit(p);
-  this.trierProduits();
+ /*    this.supprimerProduit(p);
+    this.ajouterProduit(p);
+    this.trierProduits(); */
   }
 
   // listeCategories():Categorie[] {
   //   return this.categories;
   //   }
-  
-    
+
+
   // consulterCategorie(id:number): Categorie{
   //   return this.categories.find(cat => cat.idCat == id)!;
   //   }
