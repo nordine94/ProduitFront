@@ -43,6 +43,24 @@ export class ProduitService {
     return this.http.post<Produit>(this.apiURL, prod, httpOptions);
   }
 
+ supprimerProduit(id : number) {
+ const url = `${this.apiURL}/${id}`;
+ return this.http.delete(url, httpOptions);
+ }
+
+ consulterProduit(id: number): Observable<Produit> {
+    const url = `${this.apiURL}/${id}`;
+    return this.http.get<Produit>(url);
+  }
+
+  updateProduit(prod :Produit) : Observable<Produit>
+  {
+  return this.http.put<Produit>(this.apiURL, prod, httpOptions);
+  }
+
+
+
+// Ancienne maniere de supprimer
 /*
   supprimerProduit( prod: Produit){
     const index = this.produits.indexOf(prod, 0);
@@ -52,15 +70,12 @@ export class ProduitService {
   }
  */
 
- supprimerProduit(id : number) {
- const url = `${this.apiURL}/${id}`;
- return this.http.delete(url, httpOptions);
- }
 
-
-  consulterProduit(id:number): Produit{
+// Ancienne maniere de consulter
+ /*  consulterProduit(id:number): Produit{
     return this.produits.find(p => p.idProduit == id)!;
-    }
+    } */
+
 
   trierProduits(){
     this.produits = this.produits.sort((n1,n2) => {
@@ -74,12 +89,17 @@ export class ProduitService {
     });
     }
 
+// Ancienne version de l'updateProduit
+/*
   updateProduit(p:Produit)
   {
- /*    this.supprimerProduit(p);
+  */
+/*    this.supprimerProduit(p);
     this.ajouterProduit(p);
-    this.trierProduits(); */
+    this.trierProduits(); *//*
+
   }
+ */
 
   // listeCategories():Categorie[] {
   //   return this.categories;
